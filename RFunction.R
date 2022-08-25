@@ -1,5 +1,4 @@
 library('move')
-library('tcltk')
 library('mapdata')
 library('mgcv')
 
