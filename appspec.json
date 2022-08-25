@@ -1,0 +1,81 @@
+{
+  "settings": [
+   {
+      "id": "minspeed",
+      "name": "Minimum ground speed for model building.",
+      "description": "Provide the minimum ground speed (unit = m/s) of your tracked species. Only locations with speed larger than it will be used for model building. Default: 4 m/s However, all locations will be annotated and returned for use in a next App.",
+      "defaultValue": 4,
+      "type": "DOUBLE"
+    },
+{
+      "id": "maxspeed",
+      "name": "Maximum ground speed for model building",
+      "description": "Provide the maximum ground speed (unit = m/s) of your tracked species. Only locations with speed less than it will be used for model building. Default: 25 m/s. However, all locations will be annotated and returned for use in a next App.",
+      "defaultValue": 25,
+      "type": "DOUBLE"
+    }	
+  ],
+  "dependencies": {
+    "R": [
+      {
+        "name": "move"
+      },
+	  {
+        "name": "tcltk"
+      },
+	  {
+        "name": "mapdata"
+      },
+	  {
+        "name": "mgcv"
+      }
+    ]
+  },
+  "createsArtifacts": true,
+  "license": {
+    "key": "GPL-3.0-or-later"
+  },
+  "language": "eng",
+  "keywords": [
+    "wind support",
+    "cross wind",
+    "airspeed"
+  ],
+  "people": [
+    {
+     "firstName": "Andrea",
+      "middleInitials": null,
+      "lastName": "Kölzsch",
+      "email": "akoelzsch@ab.mpg.de",
+      "roles": [
+        "author",
+        "creator"
+      ],
+      "orcid": "0000-0003-0193-1563",
+      "affiliation": "Max-Planck-Institute of Animal Behavior",
+      "affiliationRor": "https://ror.org/026stee22"
+    },
+	    {
+     "firstName": "Kamran",
+      "middleInitials": null,
+      "lastName": "Safi",
+      "email": "ksafi@ab.mpg.de",
+      "roles": [
+        "author"
+      ],
+      "orcid": "",
+      "affiliation": "Max-Planck-Institute of Animal Behavior",
+      "affiliationRor": "https://ror.org/026stee22"
+    }
+  ],
+  "references": [
+	{
+	"type": "IsDescribedBy",
+	"note": "Safi, K., Kranstauber, B., Weinzierl, R. et al. Flying with the wind: scale dependency of speed and direction measurements in modelling wind support in avian flight. Mov Ecol 1, 4 (2013)",
+	"url": "https://doi.org/10.1186/2051-3933-1-4"
+	}
+  ],
+  "documentation": {
+    "url": "https://github.com/movestore/wind_support/blob/main/README.md"
+  }
+}
