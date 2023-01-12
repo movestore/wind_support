@@ -22,7 +22,7 @@ moveStack in Movebank format
 `Wind_support_plots.pdf`: A 4 page results artefact including histogrammes of airspeed and ground speed as well as model results indicating influence of wind support and/or cross wind on ground speed and airspeed, respectively (plots and model estimates).
 
 ### Parameters 
-`minspeed`: minimum ground speed (unit = m/s) of your tracked species. Only locations with speed less than it will be used for model building. Default: 25 m/s. However, all locations will be annotated and returned for use in a next App.
+`minspeed`: minimum ground speed (unit = m/s) of your tracked species. Only locations with speed less than it will be used for model building. Default: 4 m/s. However, all locations will be annotated and returned for use in a next App.
 
 `maxspeed`: maximum ground speed (unit = m/s) of your tracked species. Only locations with speed less than it will be used for model building. Default: 25 m/s. However, all locations will be annotated and returned for use in a next App.
 
