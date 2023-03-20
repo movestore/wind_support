@@ -21,14 +21,14 @@ moveStack in Movebank format
 ### Artefacts
 `Wind_support_plots.pdf`: A 4 page results artefact including histogrammes of airspeed and ground speed as well as model results indicating influence of wind support and/or cross wind on ground speed and airspeed, respectively (plots and model estimates).
 
-### Parameters 
-`minspeed`: minimum ground speed (unit = m/s) of your tracked species. Only locations with speed less than it will be used for model building. Default: 4 m/s. However, all locations will be annotated and returned for use in a next App.
+### Settings
+**Minimum ground speed for model building. (`minspeed`):** minimum ground speed (unit = m/s) of your tracked species. Only locations with speed less than it will be used for model building. Default: 4 m/s. However, all locations will be annotated and returned for use in a next App.
 
-`maxspeed`: maximum ground speed (unit = m/s) of your tracked species. Only locations with speed less than it will be used for model building. Default: 25 m/s. However, all locations will be annotated and returned for use in a next App.
+**Maximum ground speed for model building (`maxspeed`):** maximum ground speed (unit = m/s) of your tracked species. Only locations with speed less than it will be used for model building. Default: 25 m/s. However, all locations will be annotated and returned for use in a next App.
 
 ### Null or error handling:
-**Parameter `minspeed`:** this parameter only affects the model building. If it is too small or too large, the model might not converge or show unrealistic results.
+**Setting `minspeed`:** this parameter only affects the model building. If it is too small or too large, the model might not converge or show unrealistic results.
 
-**Parameter `maxspeed`:** this parameter only affects the model building. If it is too small or too large, the model might not converge or show unrealistic results.
+**Setting `maxspeed`:** this parameter only affects the model building. If it is too small or too large, the model might not converge or show unrealistic results.
 
 **Data:** The full data set with additional attributes is returned.
