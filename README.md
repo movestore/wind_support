@@ -22,7 +22,9 @@ If available, you are highly recommended to include the following:
 * [ground.speed](http://vocab.nerc.ac.uk/collection/MVB/current/MVB000124/): ground speed in m/s
 If not provided, these will be calculated from consecutive fixes as between-location speed and heading. Note that these calculated values are much less accurate than those provided as instantaneous measurements by the sensor, because they assume travel in a straight line between fixes, which becomes less likely as the sampling rate decreases.
 
-Wind support, cross wind and airspeed are calculated and added to each location as described in [Safi et al. 2013](https://doi.org/10.1186/2051-3933-1-4): Flying with the wind: scale dependency of speed and direction measurements in modelling wind support in avian flight. Movement Ecology 1:4. In addition, GAMM models are fitted to airspeed and ground speed, indicating to which extent they are affected by wind support and cross wind. See details in the above-mentioned publication. 
+Wind support, cross wind and airspeed are calculated and added to each location as described in [Safi et al. 2013](https://doi.org/10.1186/2051-3933-1-4): Flying with the wind: scale dependency of speed and direction measurements in modelling wind support in avian flight. Movement Ecology 1:4. In addition, GAMM models are fitted to airspeed and ground speed, indicating to which extent they are affected by wind support and cross wind. See details in the above-mentioned publication. We paste Figure 1 of this paper for understanding of the relationships between ground speed and airspeed:
+
+![Screenshot 2023-05-05 at 11-26-58 Flying with the wind scale dependency of speed and direction measurements in modelling wind support in avian flight - Movement Ecology](https://user-images.githubusercontent.com/65662928/236422820-20a6d89e-e3d5-4a1b-8083-408822683315.png)
 
 ### Input data
 moveStack in Movebank format
