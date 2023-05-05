@@ -124,7 +124,9 @@ if(sum(length(grep("U.Component", names(data))), length(grep("V.Component", name
     data@data$cw <- cross_wind(data@data[,uix],data@data[,vix],data@data$heading)
     data@data$airspeed <- airspeed(data)
     
-    data.df <- as.data.frame(data)
+    #here some fixes if loncation.long/lat and/or individual.local.identifier have gone missing along the workflow
+    if (any(names(data)=="location.long")) data.df <- as.data.frame(data) else data.df <- cbind(as.data.frame(data),"location.long"=coordinates(data)[,1],"location.lat"=coordinates(data)[,2])
+    if (!any(names(data.df)=="individual.local.identifier")) data.df <- cbind(data.df,"individual.local.identifier"=data.df$trackId)
     logger.info(paste("The ground speed range will be limited to between ", minspeed, " and ", maxspeed, " m/s.", sep=""))
     data.df <- data.df[data.df$ground.speed>minspeed & data.df$ground.speed<maxspeed,]
     modgs <- gamm(sqrt(ground.speed)~s(location.long, location.lat)+cw*ws, 
