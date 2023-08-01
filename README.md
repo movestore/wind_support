@@ -27,10 +27,10 @@ Wind support, cross wind and airspeed are calculated and added to each location 
 ![Screenshot 2023-05-05 at 11-26-58 Flying with the wind scale dependency of speed and direction measurements in modelling wind support in avian flight - Movement Ecology](https://user-images.githubusercontent.com/65662928/236422820-20a6d89e-e3d5-4a1b-8083-408822683315.png)
 
 ### Input data
-moveStack in Movebank format
+move2 location object
 
 ### Output data
-moveStack in Movebank format
+move2 location object
 
 ### Artefacts
 `Wind_support_plots.pdf`: A 4-page PDF including histograms of air speed and ground speed as well as model results indicating influence of wind support and/or cross wind on ground speed and airspeed, respectively (plots and model estimates). Airspeed is the speed of the bird relative to the wind, and ground speed is the horizontal movement velocity, typically provided as instentaneous velocity by the sensor. 

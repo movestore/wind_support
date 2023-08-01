@@ -1,6 +1,7 @@
-library('move')
+library('move2')
 library('mapdata')
 library('mgcv')
+library('sf')
 
 rFunction <- function(data,minspeed=4,maxspeed=25)
 {
@@ -36,7 +37,7 @@ rFunction <- function(data,minspeed=4,maxspeed=25)
     pws.as <- predict(modas$gam, newdata=data.frame(ws=seq(min(x.df$ws, na.rm=T), max(x.df$ws, na.rm=T), length.out=100), cw=rep(0,100), location.long=rep(mean(x.df$location.long, na.rm=T), 100), location.lat=mean(x.df$location.lat, na.rm=T)))
     
     # Open a pdf file and plot all into it
-    pdf(paste0(Sys.getenv(x = "APP_ARTIFACTS_DIR", "/tmp/"),"Wind_support_plots.pdf"))
+    pdf(appArtifactPath("Wind_support_plots.pdf"))
     # First page split in 4 areas
     layout(matrix(c(1,1,1,1,5,2,3,6,5,4,4,6), ncol=4, byrow=T), height=c(0.1,0.45,0.45), width=c(0.1,0.4,0.4,0.1))
     par(mar=c(0,0,0,0))
@@ -112,21 +113,25 @@ if(sum(length(grep("U.Component", names(data))), length(grep("V.Component", name
   {
     if(sum(as.numeric(names(data) %in% c("ground.speed", "heading")))!=2)
     {
-      logger.info("No heading and ground speed were provided and were calculated from next locations!")
-      data$heading <- unlist(lapply(lapply(split(data), angle), "c", NA))
-      data$ground.speed <- unlist(lapply(lapply(split(data), speed), "c", NA))
-    } else logger.info("Analysis will be based on heading and ground speed provided.")
+      logger.info("No heading and/or ground speed were provided and were calculated from next locations!")
+      if (!any(names(data)=="heading")) data$heading <- unlist(lapply(lapply(split(data), angle), "c", NA))
+      if (!any(names(data) %in% c("ground.speed","ground_speed"))) data$ground.speed <- unlist(lapply(split(data,mt_track_id(data)), function(x) as.numeric(units::set_units(mt_speed(x),m/s)))) else {
+        if(any(names(data)=="ground_speed")) data$ground.speed <- data$ground_speed
+      }
+    } else logger.info("Analysis will be based on heading and ground speed provided.") 
     
     uix <- grep("U.Component", names(data))
     vix <- grep("V.Component", names(data))
     
-    data@data$ws <- wind_support(data@data[,uix],data@data[,vix],data@data$heading)
-    data@data$cw <- cross_wind(data@data[,uix],data@data[,vix],data@data$heading)
-    data@data$airspeed <- airspeed(data)
+    data.df <- as.data.frame(data)
+    
+    data$ws <- wind_support(data.df[,uix],data.df[,vix],data.df$heading)
+    data$cw <- cross_wind(data.df[,uix],data.df[,vix],data.df$heading)
+    data$airspeed <- airspeed(data)
     
     #here some fixes if loncation.long/lat and/or individual.local.identifier have gone missing along the workflow
-    if (any(names(data)=="location.long")) data.df <- as.data.frame(data) else data.df <- cbind(as.data.frame(data),"location.long"=coordinates(data)[,1],"location.lat"=coordinates(data)[,2])
-    if (!any(names(data.df)=="individual.local.identifier")) data.df <- cbind(data.df,"individual.local.identifier"=data.df$trackId)
+    if (any(names(data)=="location.long")) data.df <- as.data.frame(data) else data.df <- cbind(as.data.frame(data),"location.long"=st_coordinates(data)[,1],"location.lat"=st_coordinates(data)[,2])
+    if (!any(names(data.df)=="individual.local.identifier")) data.df <- cbind(data.df,"individual.local.identifier"=mt_track_id(data))
     logger.info(paste("The ground speed range will be limited to between ", minspeed, " and ", maxspeed, " m/s.", sep=""))
     data.df <- data.df[data.df$ground.speed>minspeed & data.df$ground.speed<maxspeed,]
     modgs <- gamm(sqrt(ground.speed)~s(location.long, location.lat)+cw*ws, 
