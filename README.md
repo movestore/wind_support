@@ -26,6 +26,8 @@ Wind support, cross wind and airspeed are calculated and added to each location 
 
 ![Screenshot 2023-05-05 at 11-26-58 Flying with the wind scale dependency of speed and direction measurements in modelling wind support in avian flight - Movement Ecology](https://user-images.githubusercontent.com/65662928/236422820-20a6d89e-e3d5-4a1b-8083-408822683315.png)
 
+Find in this repository an example file that has been annotated with Env-DATA in Movebank: Migration timing in white-fronted geese (data from Klzsch et al. 2016)-666883230749212926.zip. This can be read with the Upload from Cloud Source App.
+
 ### Input data
 moveStack in Movebank format
 
